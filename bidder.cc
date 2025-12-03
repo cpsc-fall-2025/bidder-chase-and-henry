@@ -15,14 +15,15 @@
 // containing the names of everyone on your team.
 std::vector<std::string> GetTeamMembers() {
   // Your code here
-  return {};
+  
+  return {"Chase Vong","Henry Gallardo"};
 }
 
 // TODO: Implement this function to return a string that describes
 // the strategy your logic uses to bid (e.g., "We bid high early on").
 std::string GetStrategy() {
   // Your code here
-  return "";
+  return "We decided to use the tortoise method with a twist. We use this method only during the beginning and the end of the rounds, skipping the middle rounds.";
 }
 
 // TODO: Implement the bidding logic.
@@ -42,6 +43,13 @@ std::string GetStrategy() {
 //   - Bids must be non-negative integers.
 void GenerateBids(int rounds, int budget, std::string output_filename) {
   // Your code here
+  std::ofstream outfile(output_filename);
+
+  int bid_per_round = budget / rounds;
+
+  for (int i {0}; i < rounds; i++){
+    outfile << bid_per_round << "\n";
+  }
 }
 
 // ============================================================================
@@ -53,6 +61,12 @@ int main() {
   // You can write code here to call your functions and see if they work.
   // Example:
   // GenerateBids(10, 100, "test_output.txt");
+ std::ofstream outfile (output_filename);
+
+  int bid_per_round = budget / rounds;
   
+  for (int i {0}; i < rounds; i++){
+    outfile << bid_per_round << "\n";
+  }
   return 0;
 }
