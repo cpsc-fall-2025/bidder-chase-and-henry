@@ -15,15 +15,16 @@
 // containing the names of everyone on your team.
 std::vector<std::string> GetTeamMembers() {
   // Your code here
-  
-  return {"Chase Vong","Henry Gallardo"};
+  return {"Chase Vong", "Henry Gallardo"};
 }
 
 // TODO: Implement this function to return a string that describes
 // the strategy your logic uses to bid (e.g., "We bid high early on").
 std::string GetStrategy() {
   // Your code here
-  return "We decided to use the tortoise method with a twist. We use this method only during the beginning and the end of the rounds, skipping the middle rounds.";
+  return "We decided to use the tortoise method with a twist. We use this "
+         "method only during the beginning and the end of the rounds, "
+         "skipping the middle rounds.";
 }
 
 // TODO: Implement the bidding logic.
@@ -45,9 +46,19 @@ void GenerateBids(int rounds, int budget, std::string output_filename) {
   // Your code here
   std::ofstream outfile(output_filename);
 
-  int bid_per_round = budget / rounds;
+  if (!outfile.good()) {
+    std::cout << "error: cannot write to file\n";
+    return;
+  }
 
-  for (int i {0}; i < rounds; i++){
+  // Simple even distribution
+  int bid_per_round = 0;
+  if (rounds > 0) {
+    bid_per_round = budget / rounds;
+  }
+
+  // Write the same bid each round
+  for (int i = 0; i < rounds; i++) {
     outfile << bid_per_round << "\n";
   }
 }
@@ -58,15 +69,13 @@ void GenerateBids(int rounds, int budget, std::string output_filename) {
 // This function will be ignored by the "make test" command.
 // ============================================================================
 int main() {
-  // You can write code here to call your functions and see if they work.
-  // Example:
-  // GenerateBids(10, 100, "test_output.txt");
- std::ofstream outfile (output_filename);
+  // Test example — you can change these for debugging locally.
+  int rounds = 10;
+  int budget = 100;
+  std::string filename = "test_output.txt";
 
-  int bid_per_round = budget / rounds;
-  
-  for (int i {0}; i < rounds; i++){
-    outfile << bid_per_round << "\n";
-  }
+  GenerateBids(rounds, budget, filename);
+
+  std::cout << "Finished writing bids to " << filename << "\n";
   return 0;
 }
